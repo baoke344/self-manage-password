@@ -8,4 +8,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/local
     username: postgres
     password: root
-
+logging:
+  level:
+    root: debug

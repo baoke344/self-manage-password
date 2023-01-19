@@ -1,4 +1,4 @@
-package com.baoanh.selfpasswordmanagement.dto;
+package com.baoanh.selfpasswordmanagement.repository.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    private boolean isActivated;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -49,7 +50,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isActivated;
     }
 
     @Override
