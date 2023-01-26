@@ -4,6 +4,7 @@ import com.baoanh.selfpasswordmanagement.helper.SecretKeyHelper;
 import com.baoanh.selfpasswordmanagement.repository.EncryptKeyService;
 import com.baoanh.selfpasswordmanagement.repository.dto.SigningKey;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +16,9 @@ public class ApplicationListener implements org.springframework.context.Applicat
 
     private final EncryptKeyService encryptKeyService;
     @Override
-    public void onApplicationEvent(ApplicationReadyEvent event) {
+    public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
         Optional<SigningKey> key = encryptKeyService.findById(1);
         SigningKey savedKey = key.orElseThrow();
-        SecretKeyHelper secretKeyHelper = new SecretKeyHelper();
-        secretKeyHelper.setKey(savedKey.getKey());
+        SecretKeyHelper.key = savedKey.getKey();
     }
 }

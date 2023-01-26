@@ -21,9 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthData login(LoginRequest request) {
-        AuthData authData = new AuthData();
 
-        return authData;
+        return new AuthData();
     }
 
     @Override

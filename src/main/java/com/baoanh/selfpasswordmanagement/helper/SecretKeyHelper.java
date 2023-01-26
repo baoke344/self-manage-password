@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class SecretKeyHelper {
-    private String key;
+
+    public static String key = "";
 }
