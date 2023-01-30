@@ -7,6 +7,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginRequest {
 
-    private String userName;
+    private String email;
     private String passWord;
 }

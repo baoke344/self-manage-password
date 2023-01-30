@@ -30,6 +30,7 @@ public class JwtServiceImpl implements JwtService {
         return claimResolver.apply(claims);
     }
 
+    @Override
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
         return Jwts.builder()
                 .addClaims(claims)
