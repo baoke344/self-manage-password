@@ -40,11 +40,14 @@ public class UserServiceImpl implements UserService {
             .orElseThrow(() -> new CustomException(HttpStatus.BAD_REQUEST.value(), "User is not registered"));
         var extraClaims = new HashMap<String, Object>();
         var jwtToken = jwtService.generateToken(extraClaims, user);
-        return new AuthData();
+        return AuthData.builder()
+            .id(user.getId())
+            .accessToken(jwtToken)
+            .build();
     }
 
     @Override
-    public String register(RegisterRequest request) {
+    public AuthData register(RegisterRequest request) {
         Optional<User> user = postGreRepository.findByEmail(request.getEmail());
         if(user.isPresent()) {
             throw new CustomException(HttpStatus.BAD_REQUEST.value(), "user already exist");
@@ -62,7 +65,9 @@ public class UserServiceImpl implements UserService {
         var jwtToken = jwtService.generateToken(extraClaims, registerUser);
         postGreRepository.save(registerUser);
 
-        return "Register Successful! Waiting for account to be activate";
+        return AuthData.builder()
+                        .accessToken(jwtToken)
+                        .build();
 
     }
 }

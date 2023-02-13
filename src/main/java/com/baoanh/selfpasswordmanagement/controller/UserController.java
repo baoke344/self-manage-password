@@ -1,6 +1,7 @@
 package com.baoanh.selfpasswordmanagement.controller;
 
 import com.baoanh.selfpasswordmanagement.request.RegisterRequest;
+import com.baoanh.selfpasswordmanagement.response.AuthData;
 import com.baoanh.selfpasswordmanagement.response.MakeResponse;
 import com.baoanh.selfpasswordmanagement.services.UserService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class UserController {
     private final UserService userService;
     @PostMapping("/register")
     public MakeResponse registerUser(@RequestBody RegisterRequest request) {
-        String response = userService.register(request);
+        AuthData response = userService.register(request);
         return MakeResponse.makeResponse(response);
     }
 }

@@ -7,5 +7,5 @@ import com.baoanh.selfpasswordmanagement.response.AuthData;
 public interface UserService {
 
     AuthData login(LoginRequest request);
-    String register(RegisterRequest request);
+    AuthData register(RegisterRequest request);
 }
