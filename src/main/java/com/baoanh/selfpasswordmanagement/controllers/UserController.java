@@ -1,7 +1,7 @@
-package com.baoanh.selfpasswordmanagement.controller;
+package com.baoanh.selfpasswordmanagement.controllers;
 
 import com.baoanh.selfpasswordmanagement.request.RegisterRequest;
-import com.baoanh.selfpasswordmanagement.response.AuthData;
+import com.baoanh.selfpasswordmanagement.response.customer.AuthData;
 import com.baoanh.selfpasswordmanagement.response.MakeResponse;
 import com.baoanh.selfpasswordmanagement.services.UserService;
 import lombok.AllArgsConstructor;

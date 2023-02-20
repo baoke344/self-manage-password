@@ -1,4 +1,4 @@
-package com.baoanh.selfpasswordmanagement.controller;
+package com.baoanh.selfpasswordmanagement.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

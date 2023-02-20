@@ -36,7 +36,7 @@ public class JWTFilter extends OncePerRequestFilter {
       @NonNull FilterChain filterChain) throws ServletException, IOException {
     final String authHeader = request.getHeader(AUTHORIZATION);
     if (!validAuthHeader(authHeader)) {
-      throw new CustomException(HttpStatus.BAD_REQUEST.value(), "Invalid authorization header");
+      filterChain.doFilter(request, response);
     }
     String token = authHeader.substring(7);
     String userEmail = jwtService.extractEmail(token);

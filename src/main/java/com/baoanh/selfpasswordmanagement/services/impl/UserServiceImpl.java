@@ -6,7 +6,7 @@ import com.baoanh.selfpasswordmanagement.exception.CustomException;
 import com.baoanh.selfpasswordmanagement.repository.PostGreRepository;
 import com.baoanh.selfpasswordmanagement.request.LoginRequest;
 import com.baoanh.selfpasswordmanagement.request.RegisterRequest;
-import com.baoanh.selfpasswordmanagement.response.AuthData;
+import com.baoanh.selfpasswordmanagement.response.customer.AuthData;
 import com.baoanh.selfpasswordmanagement.services.JwtService;
 import com.baoanh.selfpasswordmanagement.services.UserService;
 import java.util.HashMap;

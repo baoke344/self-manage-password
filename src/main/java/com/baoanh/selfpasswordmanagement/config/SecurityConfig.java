@@ -3,6 +3,7 @@ package com.baoanh.selfpasswordmanagement.config;
 import com.baoanh.selfpasswordmanagement.filters.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Configuration
 public class SecurityConfig {
 
   private final AuthenticationProvider authenticationProvider;
@@ -21,7 +23,10 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-    httpSecurity.csrf().disable().authorizeHttpRequests()
+    httpSecurity
+        .csrf()
+        .disable()
+        .authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/api/v1/user/register", "/api/v1/auth/**")
         .permitAll()
         .anyRequest()

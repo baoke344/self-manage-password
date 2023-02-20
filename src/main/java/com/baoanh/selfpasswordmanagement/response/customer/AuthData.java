@@ -1,4 +1,4 @@
-package com.baoanh.selfpasswordmanagement.response;
+package com.baoanh.selfpasswordmanagement.response.customer;
 
 import lombok.Builder;
 import lombok.Data;
