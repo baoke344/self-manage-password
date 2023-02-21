@@ -37,6 +37,7 @@ public class JWTFilter extends OncePerRequestFilter {
     final String authHeader = request.getHeader(AUTHORIZATION);
     if (!validAuthHeader(authHeader)) {
       filterChain.doFilter(request, response);
+      return;
     }
     String token = authHeader.substring(7);
     String userEmail = jwtService.extractEmail(token);
