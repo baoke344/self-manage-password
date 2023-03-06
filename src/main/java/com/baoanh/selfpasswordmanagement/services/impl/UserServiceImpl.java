@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassWord()))
             .isActivated(false)
-            .role(Role.USER)
+            .role(Role.ADMIN)
             .build();
         var extraClaims = new HashMap<String, Object>();
         var jwtToken = jwtService.generateToken(extraClaims, registerUser);

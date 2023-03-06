@@ -2,19 +2,24 @@ package com.baoanh.selfpasswordmanagement.aop;
 
 import com.baoanh.selfpasswordmanagement.exception.CustomException;
 import com.baoanh.selfpasswordmanagement.response.Error;
-import org.springframework.http.HttpStatusCode;
+import javax.naming.AuthenticationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@RestControllerAdvice(basePackages = "com.baoanh.selfpasswordmanagement.controllers")
-@RequestMapping
-public class CustomExceptionHandler {
+@RestControllerAdvice
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(CustomException.class)
   public ResponseEntity<Error> handlerException(final CustomException ex) {
-    return new ResponseEntity<>(new Error(ex.getCode(), ex.getMessage()), HttpStatusCode.valueOf(
-        ex.getCode()));
+    return ResponseEntity.badRequest().body(new Error(ex.getCode(), ex.getMessage()));
+  }
+
+  @ExceptionHandler(AuthenticationException.class)
+  public ResponseEntity<Error> handlerAuthenticationException(final Exception ex) {
+
+    return ResponseEntity.badRequest().body(new Error(HttpStatus.UNAUTHORIZED.value(), ex.getMessage()));
   }
 }
