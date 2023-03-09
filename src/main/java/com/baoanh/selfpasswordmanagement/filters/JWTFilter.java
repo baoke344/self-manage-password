@@ -2,8 +2,7 @@ package com.baoanh.selfpasswordmanagement.filters;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-import com.baoanh.selfpasswordmanagement.exception.CustomException;
-import com.baoanh.selfpasswordmanagement.exception.JWTException;
+import com.baoanh.selfpasswordmanagement.exception.JWTHandleError;
 import com.baoanh.selfpasswordmanagement.services.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -64,7 +63,7 @@ public class JWTFilter extends OncePerRequestFilter {
       filterChain.doFilter(request, response);
     } catch (ExpiredJwtException expiredJwtException) {
       String errorJsonString = mapper.writeValueAsString(
-          new JWTException(HttpStatus.SC_UNAUTHORIZED, expiredJwtException.getMessage()));
+          new JWTHandleError(HttpStatus.SC_UNAUTHORIZED, expiredJwtException.getMessage()));
       response.setStatus(HttpStatus.SC_UNAUTHORIZED);
       response.setContentType(ContentType.APPLICATION_JSON.toString());
       response.getWriter().print(errorJsonString);
@@ -72,7 +71,7 @@ public class JWTFilter extends OncePerRequestFilter {
     } catch (UnsupportedJwtException | MalformedJwtException | SignatureException |
              IllegalArgumentException unsupportedJwtException) {
       String errorJsonString = mapper.writeValueAsString(
-          new JWTException(HttpStatus.SC_FORBIDDEN, unsupportedJwtException.getMessage()));
+          new JWTHandleError(HttpStatus.SC_FORBIDDEN, unsupportedJwtException.getMessage()));
       response.setStatus(HttpStatus.SC_FORBIDDEN);
       response.getWriter().print(errorJsonString);
       response.getWriter().flush();

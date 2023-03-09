@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JWTException {
+public class JWTHandleError {
 
   private int code;
   private String message;

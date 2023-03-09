@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CustomException extends RuntimeException{
 
-    private int code;
-    private String message;
+    private int code = 200;
+    private String message = "";
 }

@@ -6,19 +6,20 @@ import com.baoanh.selfpasswordmanagement.repository.dto.SigningKey;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class ApplicationListener implements org.springframework.context.ApplicationListener<ApplicationReadyEvent> {
+public class ApplicationListenerConfig implements ApplicationListener<ApplicationReadyEvent> {
 
     private final EncryptKeyService encryptKeyService;
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
         Optional<SigningKey> key = encryptKeyService.findById(1);
         SigningKey savedKey = key.orElseThrow();
-        SecretKeyHelper.key = savedKey.getKey();
+        SecretKeyHelper.setKey(savedKey.getKey());
     }
 }
