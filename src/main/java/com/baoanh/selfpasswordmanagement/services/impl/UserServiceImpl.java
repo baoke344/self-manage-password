@@ -3,7 +3,7 @@ package com.baoanh.selfpasswordmanagement.services.impl;
 import com.baoanh.selfpasswordmanagement.repository.dto.Role;
 import com.baoanh.selfpasswordmanagement.repository.dto.User;
 import com.baoanh.selfpasswordmanagement.exception.CustomException;
-import com.baoanh.selfpasswordmanagement.repository.PostGreRepository;
+import com.baoanh.selfpasswordmanagement.repository.UserPostGreRepository;
 import com.baoanh.selfpasswordmanagement.request.LoginRequest;
 import com.baoanh.selfpasswordmanagement.request.RegisterRequest;
 import com.baoanh.selfpasswordmanagement.response.customer.AuthData;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final PostGreRepository postGreRepository;
+    private final UserPostGreRepository userPostGreRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
                 request.getPassWord()
             )
         );
-        User user = postGreRepository.findByEmail(request.getEmail())
+        User user = userPostGreRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new CustomException(HttpStatus.BAD_REQUEST.value(), "User is not registered"));
         var extraClaims = new HashMap<String, Object>();
         var jwtToken = jwtService.generateToken(extraClaims, user);
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthData register(RegisterRequest request) {
-        Optional<User> user = postGreRepository.findByEmail(request.getEmail());
+        Optional<User> user = userPostGreRepository.findByEmail(request.getEmail());
         if(user.isPresent()) {
             throw new CustomException(HttpStatus.BAD_REQUEST.value(), "user already exist");
         }
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
             .build();
         var extraClaims = new HashMap<String, Object>();
         var jwtToken = jwtService.generateToken(extraClaims, registerUser);
-        postGreRepository.save(registerUser);
+        userPostGreRepository.save(registerUser);
 
         return AuthData.builder()
                         .accessToken(jwtToken)

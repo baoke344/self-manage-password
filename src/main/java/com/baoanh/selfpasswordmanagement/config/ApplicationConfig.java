@@ -1,6 +1,6 @@
 package com.baoanh.selfpasswordmanagement.config;
 
-import com.baoanh.selfpasswordmanagement.repository.PostGreRepository;
+import com.baoanh.selfpasswordmanagement.repository.UserPostGreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final PostGreRepository postGreRepository;
+  private final UserPostGreRepository userPostGreRepository;
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> postGreRepository
+    return username -> userPostGreRepository
         .findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
