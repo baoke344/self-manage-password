@@ -5,6 +5,7 @@ import com.baoanh.selfpasswordmanagement.response.Error;
 import javax.naming.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -21,5 +22,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<Error> handlerAuthenticationException(final Exception ex) {
 
     return ResponseEntity.badRequest().body(new Error(HttpStatus.UNAUTHORIZED.value(), ex.getMessage()));
+  }
+
+  @ExceptionHandler(LockedException.class)
+  public ResponseEntity<Error> handlerAccountLockedException(final Exception ex) {
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error(HttpStatus.FORBIDDEN.value(),
+        ex.getMessage()));
   }
 }
