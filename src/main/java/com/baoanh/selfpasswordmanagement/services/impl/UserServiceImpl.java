@@ -1,7 +1,7 @@
 package com.baoanh.selfpasswordmanagement.services.impl;
 
-import com.baoanh.selfpasswordmanagement.repository.dto.Role;
-import com.baoanh.selfpasswordmanagement.repository.dto.User;
+import com.baoanh.selfpasswordmanagement.repository.dto.user.Role;
+import com.baoanh.selfpasswordmanagement.repository.dto.user.User;
 import com.baoanh.selfpasswordmanagement.exception.CustomException;
 import com.baoanh.selfpasswordmanagement.repository.UserPostGreRepository;
 import com.baoanh.selfpasswordmanagement.request.LoginRequest;

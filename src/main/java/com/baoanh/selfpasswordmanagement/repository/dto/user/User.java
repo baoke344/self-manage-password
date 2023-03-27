@@ -1,4 +1,4 @@
-package com.baoanh.selfpasswordmanagement.repository.dto;
+package com.baoanh.selfpasswordmanagement.repository.dto.user;
 
 import jakarta.persistence.*;
 import lombok.*;
