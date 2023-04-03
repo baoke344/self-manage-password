@@ -5,7 +5,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/local
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: root
 logging:

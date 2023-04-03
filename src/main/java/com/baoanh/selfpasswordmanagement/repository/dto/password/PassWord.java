@@ -27,5 +27,6 @@ public class PassWord {
   private String name;
   private Date createdDate;
   private Date updatedDate;
+  private String categoryId;
 
 }
